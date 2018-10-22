@@ -9,8 +9,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 const TabBarItem = ( props ) => {
 	return (
 		<View style={ styles.container } >
-			<Icon name={ props.icon } style={ styles.icon } ></Icon>
-			<Text style={ styles.label } >{ props.label }</Text>
+			<Icon name={ props.icon } style={[ styles.icon, props.selected && styles.selectedLabel ]} ></Icon>
+			<Text style={[ styles.label, props.selected && styles.selectedLabel ]} >{ props.label }</Text>
 		</View>
 	)
 }

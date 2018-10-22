@@ -9,7 +9,13 @@ import TabBarItem from './TabBarItem';
 
 const TabBar = ( props ) => {
 	return (
-		<Tabs style={ styles.tabContainer } >
+		<Tabs
+			style={ styles.tabContainer }
+			selected={ props.selectedService }
+			onSelect={ comp => {
+				props.onTabChange(comp.props.name)
+			}}
+		>
 			<TabBarItem name="web" label="Web Server" icon="server" />
 			<TabBarItem name="db" label="DB Server" icon="database" />
 			<TabBarItem name="mail" label="Mail Server" icon="envelope-o" />

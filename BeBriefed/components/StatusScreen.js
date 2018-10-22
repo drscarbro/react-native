@@ -28,14 +28,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    alignItems: 'center'
   },
 	statusText: {
 		fontSize: 40,
 		fontWeight: 'bold',
 		marginTop: 60,
 		textAlign: 'center',
+		color: '#E6E8EF',
 		backgroundColor: 'rgba(0,0,0,0)'
 	},
 	lastUpText: {
