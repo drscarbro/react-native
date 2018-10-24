@@ -4,8 +4,11 @@ import {
 	Text,
 	TextInput,
 	TouchableOpacity,
-	StyleSheet
+	Linking,
+	StyleSheet,
+	AsyncStorage
 } from 'react-native';
+import { setCustomerInfo } from '../StorageManager'
 
 const SignInScreen = ( props ) => (
 	<View style={ styles.container } >
@@ -13,22 +16,50 @@ const SignInScreen = ( props ) => (
 			<Text style={ styles.label } >
 				My Name:
 			</Text>
-			<TextInput style={ styles.textBox } />
+			<TextInput
+				style={ styles.textBox }
+				value={ props.name }
+				onChangeText={ props.onNameUpdate }
+			/>
 			<Text style={ styles.label } >
 				My Account Number:
 			</Text>
-			<TextInput style={ styles.textBox } keyboardType="numeric" />
-			<TouchableOpacity style={ styles.actionButton } >
+			<TextInput
+				style={ styles.textBox }
+				keyboardType="numeric"
+				value={ props.accountNumber }
+				onChangeText={ props.onAccountNumberUpdate }
+			/>
+			<TouchableOpacity
+				style={ styles.actionButton }
+				onPress={ ( ) => { goPressHandler( props.navHandler, props.name, props.accountNumber ) } }
+			>
 				<Text style={ styles.actionButtonText } >
 					Go
 				</Text>
 			</TouchableOpacity>
 		</View>
-		<Text style={ styles.externalLink }>
+		<Text
+			style={ styles.externalLink }
+			onPress={ openHelpPage }
+		>
 			Forgot your account number?
 		</Text>
 	</View>
-)
+);
+
+function goPressHandler ( navHandler, name, accountNum ) {
+	setCustomerInfo( name, accountNum )
+	.then( navHandler( ) )
+	.catch( ex => {
+		console.log( 'Error while storing customer name and account. Proceeding...\nError Details: \n' );
+		navHandler( );
+	});
+};
+
+function openHelpPage ( ) {
+	Linking.openURL('https://www.google.com')
+};
 
 const styles = StyleSheet.create({
 	container: {
